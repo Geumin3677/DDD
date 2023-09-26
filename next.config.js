@@ -5,7 +5,7 @@ const withPWA = require("next-pwa");
 const nextConfig = {
 	reactStrictMode: true,
   	output: 'export',
-	basePath: "/DDD"
+	basePath: "/DDD",
 };
 
 module.exports = withPlugins(

@@ -18,7 +18,7 @@ export default function Home() {
   }
 
   function onClikBack() {
-    window.location.href = '/'
+    window.location.href = '/DDD'
   }
 
   const observe = (element) => {

@@ -84,6 +84,10 @@ export default function Home() {
     setSc(true)
   }
 
+  function onClikJoin() {
+    window.location.href = '/welcome'
+  }
+
   return (
     <div className="background">
       <div className="welcomeSection">
@@ -93,12 +97,15 @@ export default function Home() {
           <div className="nav">
             <div className="navMenuCxt">
               <div className="navMenu btn">정책</div>
-              <div className="navMenu navDrop">게시판
-                <div className="navDropCxt">
-                  <a href="#" className="drop btn">자유 게시판</a>
-                  <a href="#" className="drop btn">자료 게시판</a>
-                  <a href="#" className="drop btn">공지 게시판</a>
-                  <a href="#" className="drop btn">ㅁㄹ 게시판</a>
+              <div className="navMenu navDrop">
+                <div style={{position:"relative", zIndex:11}}>게시판</div>
+                <div style={{zIndex:9, marginBottom:'400px'}}>
+                  <div className="navDropCxt">
+                    <a href="#" className="drop btn">자유 게시판</a>
+                    <a href="#" className="drop btn">자료 게시판</a>
+                    <a href="#" className="drop btn">공지 게시판</a>
+                    <a href="#" className="drop btn">ㅁㄹ 게시판</a>
+                  </div>
                 </div>
               </div>
               <div className="navMenu btn">제작자</div>
@@ -116,8 +123,6 @@ export default function Home() {
               </div>
             </div>
             <div className="imgbox">
-              {/* 
-              */}
               <div className="bgC1">
                 <img className="chatS1 chat show" src="/images/chat1.png" />
                 <img className="chatS2 chat show" src="/images/chat2.png" />
@@ -126,16 +131,23 @@ export default function Home() {
               
             </div>
           </div>
-          <div className="joinBtn btn">
+          <div className="mobAd">
+              <div className="board1">
+                <div className="boardTop">자유 게시판</div>
+                <div className="boardLine"></div>
+              </div>
+          </div>
+          <div className="joinBtn btn"  onClick={onClikJoin.bind(this)}>
             <div className="rect1">▶</div>
             <div className="join1">참여하기</div>
             <div className="rect1">◀︎</div>
-        </div>
+          </div>
       </div>
       <div className="secondSection">
         <div className="cardCxt1">
           <div className="board1">
             <div className="boardTop">자유 게시판</div>
+
             <div className="boardLine"></div>
           </div>
           <div className="blank"></div>

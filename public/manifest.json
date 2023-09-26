@@ -4,8 +4,8 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "출석확인",
-    "short_name": "출석확인",
+    "name": "Imae",
+    "short_name": "Imae",
     "orientation": "portrait",
     "icons": [
         {

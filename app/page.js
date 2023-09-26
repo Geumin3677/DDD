@@ -85,7 +85,7 @@ export default function Home() {
   }
 
   function onClikJoin() {
-    window.location.href = '/welcome'
+    window.location.href = '/DDD/welcome'
   }
 
   return (
@@ -124,9 +124,9 @@ export default function Home() {
             </div>
             <div className="imgbox">
               <div className="bgC1">
-                <img className="chatS1 chat show" src="/images/chat1.png" />
-                <img className="chatS2 chat show" src="/images/chat2.png" />
-                <img className="bg1 show" src="/images/bg1.png" />
+                <img className="chatS1 chat show" src="./images/chat1.png" />
+                <img className="chatS2 chat show" src="./images/chat2.png" />
+                <img className="bg1 show" src="./images/bg1.png" />
               </div>
               
             </div>

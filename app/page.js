@@ -99,7 +99,7 @@ export default function Home() {
     const remainTime = document.querySelector('.dday')
 
       const masTime = new Date("2023-12-14");
-      const todayTime = new Date();
+      const todayTime = new Date((new Date()).getTime() + (1000 * 60 * 60 * 9));
       
       const diff = masTime - todayTime;
       
@@ -136,7 +136,7 @@ export default function Home() {
 
   function getTime(t) {
     const date = new Date(t)
-    var late = new Date().getTime() - date.getTime()
+    var late = new Date((new Date()).getTime() + (1000 * 60 * 60 * 9)).getTime() - date.getTime()
     late = Math.floor(late/1000)
     if(late < 60) {
         return `${late}초 전`

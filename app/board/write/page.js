@@ -45,7 +45,7 @@ export default function Home() {
                     authorInfo:{
                         author: session.user.name,
                         authorImg: session.user.image,
-                        time: new Date()
+                        time: new Date((new Date()).getTime() + (1000 * 60 * 60 * 9))
                     },
                     views: 0,
                     like: 0,

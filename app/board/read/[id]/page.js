@@ -69,7 +69,7 @@ export default function Home() {
                   name: session.user.name
                 },
                 data: document.querySelector('.cinput').value,
-                time: new Date(),
+                time: new Date((new Date()).getTime() + (1000 * 60 * 60 * 9)),
                 cocomment: []
             },
             id: post.id

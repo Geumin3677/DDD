@@ -27,10 +27,10 @@ export default async function RootLayout({ children }) {
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"></meta>
-        <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js" async></script>
       </head>
         <body className={inter.className}>
-          <AuthSession children={children} session={session} />
+          <AuthSession session={session}>{children}</AuthSession>
         </body>
     </html>
   )

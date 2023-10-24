@@ -187,9 +187,9 @@ export default function Home() {
                                   </div>
                                 </div>
                                 {
-                                  element.cocomment.map((element) => {
+                                  element.cocomment.map((element, index) => {
                                     return(
-                                      <div className="cocomment">
+                                      <div className="cocomment" key={index}>
                                         <img className="profile" src={element.user.img}></img>
                                         <div className="aa">
                                           <div className="bb">

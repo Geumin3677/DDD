@@ -134,8 +134,8 @@ export default function Home() {
                 <h1>신규 게시글</h1>
                 <div className="board11">
                   {
-                    posts.map((element) => {    
-                        return (<div className="postPrevCxt" onClick={() => {window.location.href=`/board/read/${element.id}`}}>
+                    posts.map((element, index) => {    
+                        return (<div className="postPrevCxt" onClick={() => {window.location.href=`/board/read/${element.id}`}} key={index}>
                             <div className="txtCxt">
                                 <div className="TitleCxt">
                                     <div className="boardType">{element.type.split(' ')[0]}</div>

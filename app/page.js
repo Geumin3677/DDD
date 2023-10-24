@@ -238,8 +238,8 @@ export default function Home() {
             <div className="boardTop">신규 게시글</div>
             <div className="boardLine" style={{marginBottom:'10px'}}></div>
             {
-                posts.map((element) => {    
-                    return (<div className="postPrevCxt" onClick={() => {window.location.href=`/board/read/${element.id}`}}>
+                posts.map((element, index) => {    
+                    return (<div className="postPrevCxt" onClick={() => {window.location.href=`/board/read/${element.id}`}} key={index}>
                         <div className="txtCxt">
                             <div className="TitleCxt">
                                 <div className="boardType">잡담</div>

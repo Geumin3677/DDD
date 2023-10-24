@@ -1,12 +1,26 @@
 "use client"
 
+import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import './board/board.css'
 
 
 export default function Home() {
 
   const [scSet, setSc] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [auth, setAuth] = useState(false)
+  const [postCnt, setCnt] = useState(-1)
+  const [posts, setPost] = useState([])
+  const [load, setLoad] = useState(false)
+  const [meal, setMeal] = useState()
+
+  const { data: session } = useSession()
+  
+  if(session !== null && !(auth)){
+    setAuth(true)
+    console.log(session)
+  }
   
   useEffect(() => {
     setHydrated(true)
@@ -17,10 +31,9 @@ export default function Home() {
   }
 
   function setUpSc() {
-    fetch("/api/getSc/?grade=1&cls=7", { method: "GET" })
+    fetch("api/getSc/?grade=1&cls=7", { method: "GET" })
         .then((res) => res.json())
         .then((res) => {
-            console.log(res)
             res = res.result
   
             var table = document.getElementById('table')
@@ -78,14 +91,80 @@ export default function Home() {
         })
   }
 
+  function setUp() {
+    setInterval(diffDay, 1000);
+  }
+
+  function diffDay() {
+    const remainTime = document.querySelector('.dday')
+
+      const masTime = new Date("2023-12-14");
+      const todayTime = new Date();
+      
+      const diff = masTime - todayTime;
+      
+      const diffDay = Math.floor(diff / (1000*60*60*24));
+      
+      remainTime.innerText = `${diffDay}`;
+
+      if(session !== null) {
+
+      }
+  }
+  async function setUpp() {
+    await fetch('/api/board/prevRead/?type=all&start=0&cnt=5')
+        .then((res) => res.json())
+        .then(async (res) => {
+            await res.data.forEach(element => {
+                setPost(prevList => [...prevList, element])
+            })
+            setCnt(res.lastPos)
+        })
+
+    await fetch ('api/getMeal') .then((res) => res.json())
+    .then(async (res) => {
+        setMeal(res.result)
+        console.log(res.result)
+    })
+  }
+
+  if(postCnt == -1)
+  {
+    setUpp()
+    setCnt(1)
+  }
+
+  function getTime(t) {
+    const date = new Date(t)
+    var late = new Date().getTime() - date.getTime()
+    late = Math.floor(late/1000)
+    if(late < 60) {
+        return `${late}초 전`
+    }
+    else if(late < 60 * 60) {
+        return `${Math.floor(late/60)}분 전`
+    }
+    else if(late < 60*60*24) {
+        return `${Math.floor((late / 60)/60)}시간 전`
+    }
+    else {
+        return `${date.getMonth() + 1}.${date.getDate()}`
+    }
+  }
+
   if(!scSet)
   {
     setUpSc()
+    setUp()
     setSc(true)
   }
 
   function onClikJoin() {
-    window.location.href = '/DDD/welcome'
+    window.location.href = '/welcome'
+  }
+
+  function onClickLogin() {
+    window.location.href = '/Login'
   }
 
   return (
@@ -101,10 +180,10 @@ export default function Home() {
                 <div style={{position:"relative", zIndex:11}}>게시판</div>
                 <div style={{zIndex:9, marginBottom:'400px'}}>
                   <div className="navDropCxt">
-                    <a href="#" className="drop btn">자유 게시판</a>
-                    <a href="#" className="drop btn">자료 게시판</a>
-                    <a href="#" className="drop btn">공지 게시판</a>
-                    <a href="#" className="drop btn">ㅁㄹ 게시판</a>
+                    <a href="board/main" className="drop btn">게시판 메인</a>
+                    <a href="board/noice" className="drop btn">공지 게시판</a>
+                    <a href="board/study" className="drop btn">공부 게시판</a>
+                    <a href="board/free" className="drop btn">잡담 게시판</a>
                   </div>
                 </div>
               </div>
@@ -112,9 +191,19 @@ export default function Home() {
             </div>
             <div className="navLine"></div>
           </div>
-          <div className="loginBtn btn">
-            <div className="join1">로그인</div>
-          </div>
+          {
+            (auth) ? (
+              <div className="userInfoCxt">
+                <div className="userName">{session.user.name}</div>
+                <img className="userProfileImg" src={session.user.image} />
+                <div onClick={() => signOut()} className="userDrop btn">로그아웃</div>
+              </div>
+            ) : (
+              <div className="loginBtn btn" onClick={onClickLogin.bind(this)}>
+                <div className="join1">로그인</div>
+              </div>
+            )
+          }
           <div className="welcomeCxt">
             <div className="txtbox">
               <div className="textbox1 show">
@@ -146,14 +235,38 @@ export default function Home() {
       <div className="secondSection">
         <div className="cardCxt1">
           <div className="board1">
-            <div className="boardTop">자유 게시판</div>
-
-            <div className="boardLine"></div>
+            <div className="boardTop">신규 게시글</div>
+            <div className="boardLine" style={{marginBottom:'10px'}}></div>
+            {
+                posts.map((element) => {    
+                    return (<div className="postPrevCxt" onClick={() => {window.location.href=`/board/read/${element.id}`}}>
+                        <div className="txtCxt">
+                            <div className="TitleCxt">
+                                <div className="boardType">잡담</div>
+                                <div className="boardTxt">{element.title}</div>
+                                {
+                                    (element.img) ? (
+                                        <svg className="boardPic" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                                            <rect x="1.5" y="1.5" width="27" height="27" rx="4.5" fill="white" stroke="#929DFF" stroke-width="3"/>
+                                            <rect x="5.32227" y="15" width="19.3548" height="9.67742" rx="4.83871" fill="#929DFF"/>
+                                            <circle cx="7.49969" cy="8.4677" r="2.17742" fill="#929DFF"/>
+                                        </svg>
+                                    ) : (
+                                        <></>
+                                    )
+                                }
+                            </div>
+                            <div className="detailTxt">{element.author} - {getTime(element.time)} | 👍{element.like} 💬{element.comment}</div>
+                        </div>
+                    </div>)
+                })
+            }
           </div>
           <div className="blank"></div>
           <div className="board2">
             <div className="boardTop secBTop">오늘의 급식</div>
             <div className="boardLine secBLine"></div>
+            <textarea className="meal" value={meal} readOnly/> 
           </div>
         </div>
         <div className="bg2"></div>
@@ -185,16 +298,16 @@ export default function Home() {
         <div className="txtSec">
           <div className="scInfoCxt">
             <div className="infoCxt">
-              <div className="I">회장선거</div>
-              <div className="D">5/23</div>
+              <div className="I">중간고사</div>
+              <div className="D">10/16</div>
             </div>
             <div className="infoCxt M">
-              <div className="I TM">중간고사</div>
-              <div className="D TM">10/16</div>
+              <div className="I TM">기말고사</div>
+              <div className="D TM">12/14</div>
             </div>
             <div className="infoCxt">
-              <div className="I">기말고사</div>
-              <div className="D">12/03</div>
+              <div className="I">종업식</div>
+              <div className="D">12/29</div>
             </div>
           </div>
         </div>

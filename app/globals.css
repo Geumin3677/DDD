@@ -37,6 +37,13 @@ a {
 }
 
 @font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'GmarketSansLight';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
   font-weight: normal;
@@ -273,6 +280,54 @@ a {
   color: #929DFF;
   z-index: 10;
   animation: upfadein 1s;
+}
+
+.userInfoCxt {
+  right: 20px;
+  top: calc(50px + 20px);
+  width: auto;
+  position:absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'S-CoreDream-Medium';
+  font-size: 2vw;
+  color: #929DFF;
+  z-index: 10;
+  animation: upfadein 1s;
+  background-color: white;
+  box-shadow: 0px 0px 10px 0px rgba(102, 102, 102, 0.5);
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.userProfileImg {
+  height: 5vw;
+  border-radius: 50em;
+  margin-left: 10px;
+}
+
+.userName {
+  height: auto;
+  width: 6vw;
+}
+
+.userDrop {
+  position: absolute;
+  top: 8.5vw;
+  right: 0;
+  background-color:  #C8C3FF;
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
+  opacity: 0;
+  font-size: 1.7vw;
+}
+
+.userInfoCxt:hover .userDrop {
+  top: 7.5vw;
+  opacity: 1;
+  z-index: 0;
 }
 
 .nav {
@@ -797,7 +852,7 @@ td:first-child {
   }
   .mobAd {
     flex: 3;
-    flex-grow: 3;
+    flex-grow: 1.5;
     background-color: red;
     display: flex;
     padding: 20px;
@@ -873,4 +928,39 @@ td:first-child {
     height: 50px;
     font-size: 15px;
   }
+
+  .userInfoCxt {
+    height: 30px;
+  }
+
+  .userName {
+    width: 13vw;
+  }
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.background::-webkit-scrollbar {
+  display: none;
+}
+
+.meal {
+  margin-top: 20px;
+  height: 100%;
+  border: none;
+  resize: none;
+  color: #7063FF;
+  font-family: 'S-CoreDream-Medium';
+  font-size: 2vw;
+  line-height: 3vw;
+}
+
+.meal:focus {
+  outline: none;
 }

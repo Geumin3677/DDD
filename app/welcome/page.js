@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import './page.css'
+import { useSession } from "next-auth/react";
 
 
 export default function Home() {
 
   const [scSet, setSc] = useState(false);
   const [hydrated, setHydrated] = useState(false);
-  
+
   useEffect(() => {
     setHydrated(true)
   }, [])
@@ -18,8 +19,9 @@ export default function Home() {
   }
 
   function onClikBack() {
-    window.location.href = '/DDD'
+    window.location.href = '/'
   }
+
 
   const observe = (element) => {
     if (!element) {
@@ -52,10 +54,10 @@ export default function Home() {
                         <div style={{position:"relative", zIndex:11}}>게시판</div>
                         <div style={{zIndex:9, marginBottom:'400px'}}>
                         <div className="navDropCxt">
-                            <a href="#" className="drop btn">자유 게시판</a>
-                            <a href="#" className="drop btn">자료 게시판</a>
-                            <a href="#" className="drop btn">공지 게시판</a>
-                            <a href="#" className="drop btn">ㅁㄹ 게시판</a>
+                            <a href="board/main" className="drop btn">게시판 메인</a>
+                            <a href="board/noice" className="drop btn">공지 게시판</a>
+                            <a href="board/study" className="drop btn">공부 게시판</a>
+                            <a href="board/free" className="drop btn">잡담 게시판</a>
                         </div>
                         </div>
                     </div>

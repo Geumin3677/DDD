@@ -1,5 +1,9 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
+import { SessionProvider } from 'next-auth/react'
+import AuthSession from './AuthSession'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/pages/api/auth/[...nextauth].js'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -10,7 +14,9 @@ export const metadata = {
   themeColor: "#355ef6",
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+
+  const session = await getServerSession(authOptions)
   return (
     <html lang="en">
       <head>
@@ -21,9 +27,11 @@ export default function RootLayout({ children }) {
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"></meta>
-
+        <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
       </head>
-      <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <AuthSession children={children} session={session} />
+        </body>
     </html>
   )
 }

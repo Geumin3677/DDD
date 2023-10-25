@@ -9,7 +9,6 @@
     display: flex;
     opacity: 1;
     color: white;
-    margin-top: 1.5vw;
 }
 
 .title {
@@ -191,4 +190,44 @@
     color: white;
     padding: 5px;
     border-radius: 5px;
+}
+
+@media screen and (max-width: 516px) {
+    .nav {
+        top: -20px
+    }
+    .title {
+        font-size: 30px;
+    }
+    .author {
+        font-size: 17px;
+    }
+    .time {
+        font-size: 14px;
+    }
+    .postCxt {
+        padding: 50px 30px 30px 30px;
+    }
+    .board11 {
+        padding: 25px;
+    }
+    .cinput {
+        padding: 10px;
+        font-size: 20px;
+    }
+    .likeBtn {
+        height: 90px;
+        width:  90px;
+    }
+    .likeTxt {
+        font-size: 30px;
+        margin-bottom: 15px;
+        margin-right: 20px;
+    }
+    .likeCxt {
+        margin-top: 10px;
+    }
+    .sendIcon {
+        height: 20px;
+    }
 }

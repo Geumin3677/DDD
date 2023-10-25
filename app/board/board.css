@@ -9,7 +9,6 @@
     display: flex;
     opacity: 1;
     color: white;
-    margin-top: 1.5vw;
   }
 
 .noticeCxt {
@@ -252,4 +251,46 @@ h2 {
 
 .cxt::-webkit-scrollbar {
     display: none;
+}
+
+@media screen and (max-width: 516px) {
+    .noticeCxt {
+        margin-top: 70px;
+    }
+
+    .boardPop {
+        padding: 10px 20px 10px 20px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+    h2 {
+        font-size: 30px;
+    }
+    .board11 {
+        padding: 10px;
+        min-height: 50vh;
+    }
+    .boardTxt {
+        font-size: 25px;
+    }
+    .boardType {
+        font-size: 20px;
+    }
+    .detailTxt {
+        font-size: 15px;
+    }
+    .noticeIcon {
+        font-size: 20px;
+    }
+    .noticeTxt {
+        font-size: 20px;
+        max-width: 200px;
+    }
+    .moreBtn {
+        padding: 10px;
+        width: 80px;
+        height: 30px;
+    }
 }

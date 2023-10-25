@@ -155,3 +155,16 @@ label {
     padding: 5px;
     margin-left: 10px;
 }
+
+@media screen and (max-width: 516px) {
+    .loginTxt {
+        font-size: 40px;
+    }
+    .loginInput {
+        width: 260px;
+        height: 70px;
+    }
+    .googleTxt {
+        font-size: 20px;
+    }
+}

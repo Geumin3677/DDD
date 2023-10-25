@@ -31,7 +31,10 @@ export default function Home() {
   }
 
   function setUpSc() {
-    fetch("api/getSc/?grade=1&cls=7", { method: "GET" })
+    if(session?.user.name == 'Admin' || session == null) {
+      return
+    }
+    fetch(`api/getSc/?grade=${session?.user.name[0]}&cls=${(session?.user.name[1] == 0) ? (session?.user.name[2]) : (10)}`, { method: "GET" })
         .then((res) => res.json())
         .then((res) => {
             res = res.result
@@ -171,7 +174,7 @@ export default function Home() {
     <div className="background">
       <div className="welcomeSection">
           <div style={{zIndex:99, position:"relative"}}>
-            <div className="topBar"></div>
+            <div className="topBar"><img style={{height: '60%', width: 'auto'}} src="./images/logo.png" onClick={() => {window.location.href = '/'}} /></div>
           </div>
           <div className="nav">
             <div className="navMenuCxt">
@@ -222,8 +225,9 @@ export default function Home() {
           </div>
           <div className="mobAd">
               <div className="board1">
-                <div className="boardTop">자유 게시판</div>
+                <div className="boardTop">오늘의 급식</div>
                 <div className="boardLine"></div>
+                <textarea className="meal" value={meal} readOnly/> 
               </div>
           </div>
           <div className="joinBtn btn"  onClick={onClikJoin.bind(this)}>
@@ -274,7 +278,7 @@ export default function Home() {
       <div className="thirdSection">
         <div className="scTitle">
           <div>SCHDULE</div>
-          <div className="scT2">1학년 7반 (9.18 ~ 9.22) 시간표</div>
+          <div className="scT2">{session?.user.name[0]}학년 {(session?.user.name[1] == 0) ? (session?.user.name[2]) : (10)}반 시간표</div>
         </div>
         <div className="scCxt">
           <div className="scBoard">

@@ -41,6 +41,10 @@ export default function Home() {
   }
 
   async function onLike() {
+    if(session == null) {
+      alert('로그인후 이용해주세요')
+      return
+    }
     if(like) {
       post.like.shift()
       fetch(`/api/board/like?name=${session.user.name}&id=${post.id}`)
@@ -118,7 +122,7 @@ export default function Home() {
           ) : (
             <div style={{position:'relative'}}>
               <div style={{zIndex:99, position:"relative"}}>
-                  <div className="topBar"></div>
+                  <div className="topBar"><img style={{height: '60%', width: 'auto'}} src="/images/logo.png" onClick={() => {window.location.href = '/'}} /></div>
               </div>
               <div className="nav">
                   <div className="navMenuCxt">

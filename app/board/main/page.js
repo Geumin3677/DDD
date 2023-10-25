@@ -54,7 +54,7 @@ export default function Home() {
 
   function getTime(t) {
     const date = new Date(t)
-    var late = new Date().getTime() - date.getTime()
+    var late = new Date((new Date()).getTime() + (1000 * 60 * 60 * 9)).getTime() - date.getTime()
     late = Math.floor(late/1000)
     if(late < 60) {
         return `${late}초 전`
@@ -73,7 +73,7 @@ export default function Home() {
   return (
     <div style={{position:'relative'}}>
         <div style={{zIndex:99, position:"relative"}}>
-            <div className="topBar"></div>
+            <div className="topBar"><img style={{height: '60%', width: 'auto'}} src="../images/logo.png" onClick={() => {window.location.href = '/'}} /></div>
         </div>
         <div className="nav">
             <div className="navMenuCxt">
